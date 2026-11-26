@@ -92,8 +92,12 @@ nano .env   # set BOT_TOKEN, DEVELOPER_CHAT_ID, PARTNER_CHAT_ID, OPERATOR_CHAT_I
 Run in background (optional):
 
 ```bash
-nohup ./start-bot.sh > bot.log 2>&1 &
-./stop-bot.sh
+chmod +x bot-bg.sh
+./bot-bg.sh start      # start in background
+./bot-bg.sh stop       # stop
+./bot-bg.sh restart
+./bot-bg.sh status
+./bot-bg.sh logs       # follow bot.log
 ```
 
 ## Deploy to Railway (24/7 cloud)
