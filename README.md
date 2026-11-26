@@ -92,8 +92,20 @@ nano .env   # set BOT_TOKEN, DEVELOPER_CHAT_ID, PARTNER_CHAT_ID, OPERATOR_CHAT_I
 Run in background (optional):
 
 ```bash
-nohup ./start-bot.sh > bot.log 2>&1 &
-./stop-bot.sh
+chmod +x bot-bg.sh
+./bot-bg.sh start      # start in background
+./bot-bg.sh stop       # stop
+./bot-bg.sh restart
+./bot-bg.sh status
+./bot-bg.sh logs       # follow bot.log
+```
+
+Remove local install (stops bot, deletes `.venv` / logs; keeps source):
+
+```bash
+chmod +x remove-ubuntu.sh
+./remove-ubuntu.sh           # keep .env
+./remove-ubuntu.sh --all     # also delete .env
 ```
 
 ## Deploy to Railway (24/7 cloud)
