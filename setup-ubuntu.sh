@@ -6,7 +6,7 @@ echo "Installing venv + dependencies..."
 python3 -m venv .venv
 .venv/bin/pip install --upgrade pip
 .venv/bin/pip install -r requirements.txt
-chmod +x start-bot.sh stop-bot.sh setup-ubuntu.sh bot-bg.sh
+chmod +x start-bot.sh stop-bot.sh setup-ubuntu.sh bot-bg.sh remove-ubuntu.sh
 
 if [[ ! -f .env ]]; then
   cp .env.example .env

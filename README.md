@@ -100,6 +100,14 @@ chmod +x bot-bg.sh
 ./bot-bg.sh logs       # follow bot.log
 ```
 
+Remove local install (stops bot, deletes `.venv` / logs; keeps source):
+
+```bash
+chmod +x remove-ubuntu.sh
+./remove-ubuntu.sh           # keep .env
+./remove-ubuntu.sh --all     # also delete .env
+```
+
 ## Deploy to Railway (24/7 cloud)
 
 This bot uses **long polling** (`python bot.py` keeps asking Telegram for new messages). That means the cloud process must stay running.
