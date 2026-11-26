@@ -1,14 +1,12 @@
 # Telegram Bridge Bot
 
-Relays messages two ways between your **developer** and **partner**.
+Relays messages two ways between your **developer** and **partner**, with **your approval** in the middle.
 
 ```
-Developer  ←→  Bot  ←→  Partner
+Developer / Partner  →  Bot  →  You (operator) approve  →  Other side
 ```
 
-When the developer sends something to the bot, the partner receives it.
-When the partner sends something to the bot, the developer receives it.
-Text, photos, files, voice, video, stickers, and most other media are copied across.
+Nothing is delivered until you approve it (or reply with your own replacement text).
 
 ## Setup (once)
 
@@ -34,23 +32,18 @@ Edit `.env` and paste the bot token:
 BOT_TOKEN=paste_token_here
 DEVELOPER_CHAT_ID=
 PARTNER_CHAT_ID=
+OPERATOR_CHAT_ID=
 ```
 
 ### 3. Get chat IDs
 
-1. Start the bot temporarily with empty IDs replaced by placeholders, **or** put any temporary numbers and use `/whoami`.
+1. Put your bot token in `.env` and run the bot
+2. From the **developer** account → DevPro → `/start` → `/whoami`
+3. From the **partner** account → `/start` → `/whoami`
+4. From **your operator** account (the one that will approve) → `/start` → `/whoami`
+5. Put those three IDs into `.env`, then restart the bot
 
-Easiest path:
-
-1. Put your bot token in `.env`
-2. Temporarily set both IDs to your own user ID (get it from [@userinfobot](https://t.me/userinfobot) or later from `/whoami`)
-3. Run the bot
-4. From the **developer** Telegram account, open the bot and send `/start` then `/whoami`
-5. From the **partner** Telegram account, open the bot and send `/start` then `/whoami`
-6. Put those two user IDs into `.env` as `DEVELOPER_CHAT_ID` and `PARTNER_CHAT_ID`
-7. Restart the bot
-
-Both people **must** press **Start** on the bot at least once, or Telegram will block delivery.
+All three accounts **must** press **Start** at least once.
 
 ### 4. Run
 
@@ -63,10 +56,13 @@ Keep this window open while you want the bridge running.
 
 ## How to use
 
-1. Developer opens the bot chat and types (or sends a file/photo)
-2. Partner gets the same content in their bot chat
-3. Partner replies in the bot chat
-4. Developer gets the reply
+1. Developer or partner sends a message to the bot
+2. **You** (operator) receive a copy plus **Approve / Reject** buttons
+3. Choose one:
+   - **Approve** → original message is sent to the other side
+   - **Reject** → nothing is sent
+   - **Reply** to the pending card with your own text → that text is sent instead
+4. Only what you approve (or rewrite) is delivered
 
 ## Free on-demand (start / stop yourself)
 
@@ -83,7 +79,7 @@ No cloud cost. Run the bot only when you need it. Machine must stay on and onlin
 # one-time setup
 chmod +x setup-ubuntu.sh start-bot.sh stop-bot.sh
 ./setup-ubuntu.sh
-nano .env   # set BOT_TOKEN, DEVELOPER_CHAT_ID, PARTNER_CHAT_ID
+nano .env   # set BOT_TOKEN, DEVELOPER_CHAT_ID, PARTNER_CHAT_ID, OPERATOR_CHAT_ID
 
 # whenever you need the bridge
 ./start-bot.sh
